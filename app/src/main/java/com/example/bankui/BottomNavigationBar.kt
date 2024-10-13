@@ -14,6 +14,10 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -40,10 +44,13 @@ fun BottomNavigationBar(){
     Row(
       modifier = Modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
     ){
+      var currentIndex by remember {
+        mutableStateOf(0)
+      }
       items.forEachIndexed { index, item ->
         NavigationBarItem(
-          selected = index == 0,
-          onClick = { /*TODO*/ },
+          selected = index == currentIndex,
+          onClick = { currentIndex = index},
           icon = {
             Icon(
               imageVector = item.icon
